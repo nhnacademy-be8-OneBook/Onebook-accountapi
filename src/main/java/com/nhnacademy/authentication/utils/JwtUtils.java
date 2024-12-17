@@ -1,4 +1,4 @@
-package com.nhnacademy.authentication.Utils;
+package com.nhnacademy.authentication.utils;
 
 import com.nhnacademy.authentication.dev_Member.Member;
 import com.nhnacademy.authentication.dto.TokenResponse;
@@ -18,12 +18,14 @@ import java.util.Date;
 public class JwtUtils {
     private final JwtProperties jwtProperties;
 
-    public TokenResponse makeJwt(Member member){
+    public TokenResponse makeJwt(String loginId){
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, jwtProperties.getExpirationTime());
 
-        String jwtToken = Jwts.builder().claim("id", member.getMember_id())
+        // front 뭐
+
+        String jwtToken = Jwts.builder().claim("id", loginId)
                 .setIssuedAt(new Date())
                 .setExpiration(calendar.getTime())
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
