@@ -6,3 +6,11 @@ Content-Type: application/json
     "id":"nhnacademy",
     "password":"nhnacademy12345*"
 }
+
+### GET JWT
+GET http://admin:1234@localhost:8000/auth/jwt
+Content-Type: application/json
+
+{
+  "id" : "test"
+}
