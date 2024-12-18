@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Member {
+public class DevMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

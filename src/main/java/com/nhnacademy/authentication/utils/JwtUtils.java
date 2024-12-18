@@ -1,6 +1,6 @@
 package com.nhnacademy.authentication.utils;
 
-import com.nhnacademy.authentication.dev_Member.Member;
+import com.nhnacademy.authentication.dev_Member.JwtMemberDto;
 import com.nhnacademy.authentication.dto.TokenResponse;
 import com.nhnacademy.authentication.properties.JwtProperties;
 import io.jsonwebtoken.Jwts;
@@ -18,14 +18,14 @@ import java.util.Date;
 public class JwtUtils {
     private final JwtProperties jwtProperties;
 
-    public TokenResponse makeJwt(String loginId){
+    public TokenResponse makeJwt(JwtMemberDto jwtMemberDto){
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, jwtProperties.getExpirationTime());
 
-        // front 뭐
+        // TODO - jwt 합쳐지면 여기 수정
 
-        String jwtToken = Jwts.builder().claim("id", loginId)
+        String jwtToken = Jwts.builder().claim("id", "")
                 .setIssuedAt(new Date())
                 .setExpiration(calendar.getTime())
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
