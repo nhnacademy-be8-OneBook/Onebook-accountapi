@@ -28,7 +28,10 @@ public class JwtUtils {
 
         // TODO - jwt 합쳐지면 여기 수정
         SecretKey key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
-        String jwtToken = Jwts.builder().claim("id", "test")
+
+        log.info("jwtMemberDto id : {}", jwtMemberDto.getId());
+
+        String jwtToken = Jwts.builder().claim("id", jwtMemberDto.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(calendar.getTime())
                 .signWith(key)
