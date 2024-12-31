@@ -8,9 +8,22 @@ Content-Type: application/json
 }
 
 ### GET JWT
-GET http://admin:1234@localhost:8000/auth/jwt
+GET http://admin:1234@localhost:8410/auth/jwt
 Content-Type: application/json
 
 {
   "id" : "test"
 }
+
+### GET JWT no security
+GET http://localhost:8410/auth/jwt
+Content-Type: application/json
+
+{
+  "id" : "test"
+}
+
+### GET JWT
+GET http://localhost:8410/auth/jwt?id=hong123
+
+
