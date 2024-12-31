@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 // TODO task-service-dev -> task-service-prod로 바꿔주기도 해야함
-@FeignClient(name = "task-service-dev")
+@FeignClient(name = "task-service")
 public interface MemberAdaptor {
 
     //    @PostMapping("/login")

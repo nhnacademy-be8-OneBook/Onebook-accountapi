@@ -5,10 +5,13 @@ import com.nhnacademy.authentication.dto.TokenResponse;
 import com.nhnacademy.authentication.properties.JwtProperties;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,13 +27,12 @@ public class JwtUtils {
         calendar.add(Calendar.SECOND, jwtProperties.getExpirationTime());
 
         // TODO - jwt 합쳐지면 여기 수정
-
-        String jwtToken = Jwts.builder().claim("id", "")
+        SecretKey key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
+        String jwtToken = Jwts.builder().claim("id", "test")
                 .setIssuedAt(new Date())
                 .setExpiration(calendar.getTime())
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
+                .signWith(key)
                 .compact();
-
 
         return new TokenResponse(jwtToken, jwtProperties.getTokenPrefix(), jwtProperties.getExpirationTime());
     }
