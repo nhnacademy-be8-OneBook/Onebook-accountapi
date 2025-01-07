@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class JwtMemberDto {
 
-    Long id;
+    String id;
     String loginId;
+    String role;
 }

@@ -2,11 +2,8 @@ package com.nhnacademy.authentication.controller;
 
 import com.nhnacademy.authentication.adaptor.MemberAdaptor;
 import com.nhnacademy.authentication.dev_Member.JwtMemberDto;
-import com.nhnacademy.authentication.dto.JwtLoginIdRequest;
-import com.nhnacademy.authentication.dto.MemberLoginDto;
+import com.nhnacademy.authentication.dto.*;
 import com.nhnacademy.authentication.utils.JwtUtils;
-import com.nhnacademy.authentication.dto.LoginRequest;
-import com.nhnacademy.authentication.dto.TokenResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,11 +42,31 @@ public class LoginController {
         throw new RuntimeException("valid 하지 않음 TODO 바꾸기  ");
     }
 
+    // 이게 jwt 생성하는 요청인거 같음.
+
+    /**
+     * 흐름
+     * 1. getMemberForJWT로 task에 있는 memberController에 요청함.
+     * 2. 응답으로
+     * @param id
+     * @return
+     */
     @GetMapping("/auth/jwt")
     public ResponseEntity<TokenResponse> getJwtToken(@RequestParam("id") String id){
         ResponseEntity<JwtMemberDto> memberForJWT = memberAdaptor.getMemberForJWT(id);
         TokenResponse tokenResponse = jwtUtils.makeJwt(memberForJWT.getBody());
         return ResponseEntity.of(Optional.of(tokenResponse));
+    }
+
+    @GetMapping("/auth/my/info")
+    public ResponseEntity<MemberInfoResponse> getInfoByAuthorization(@RequestHeader("Authorization") String authorization) {
+        String memberId = jwtUtils.parseAndReturnId(authorization);
+        MemberResponseDto memberResponseDto = memberAdaptor.getMemberById(memberId).getBody();
+        MemberInfoResponse result = new MemberInfoResponse(
+                memberResponseDto.name(),
+                memberResponseDto.loginId(),
+                memberResponseDto.role());
+        return ResponseEntity.ok().body(result);
     }
 
 }
