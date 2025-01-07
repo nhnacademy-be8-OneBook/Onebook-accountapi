@@ -3,6 +3,7 @@ package com.nhnacademy.authentication.adaptor;
 
 import com.nhnacademy.authentication.dev_Member.JwtMemberDto;
 import com.nhnacademy.authentication.dto.MemberLoginDto;
+import com.nhnacademy.authentication.dto.MemberResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,8 @@ public interface MemberAdaptor {
     @GetMapping("/task/members/jwt/{loginId}")
     public ResponseEntity<JwtMemberDto> getMemberForJWT(@PathVariable("loginId") String loginId);
 
+    @GetMapping("/task/members/{memberId}")
+    ResponseEntity<MemberResponseDto> getMemberById(@PathVariable("memberId") String memberId);
 
 
 }
