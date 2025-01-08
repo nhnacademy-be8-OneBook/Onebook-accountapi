@@ -16,6 +16,7 @@ import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -52,7 +53,7 @@ public class JwtUtils {
      * @return
      */
     public String parseAndReturnId(String authorization) {
-        String token = authorization.substring(7);
+        String token = validateAndExtractToken(authorization);
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(secretKey.getBytes())
                 .build()
@@ -60,4 +61,12 @@ public class JwtUtils {
                 .getBody();
         return claims.get("id", String.class);
     }
+
+    public String validateAndExtractToken(String authorization) {
+        if (Objects.isNull(authorization) || !authorization.startsWith("Bearer ")) {
+            throw new IllegalArgumentException("토큰 헤더가 유효하지않음. Bearer 로 시작해야함.");
+        }
+        return authorization.substring(7);
+    }
+
 }
