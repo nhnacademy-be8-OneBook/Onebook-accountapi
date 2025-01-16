@@ -99,9 +99,3 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script_stop: true
           script: /home/nhnacademy/onebook/main/startup/auth_startup.sh
-
-
-      # sonarQube 실행
-      - name: Run SonarQube
-        run: mvn clean verify sonar:sonar -Dsonar.projectKey=onebook-task-api -Dsonar.projectName='onebook-task-api' -Dsonar.host.url=${{secrets.SONAR_HOST}} -Dsonar.login=${{secrets.SONAR_AUTH_TOKEN}}
-
