@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class JwtMemberDto {
-
     String id;
     String loginId;
     String role;
