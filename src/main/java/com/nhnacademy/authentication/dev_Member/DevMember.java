@@ -11,8 +11,6 @@ public class DevMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int member_id;
-
     String id;
-
     String password;
 }
