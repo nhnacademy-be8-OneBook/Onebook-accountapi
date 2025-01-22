@@ -5,6 +5,9 @@ import com.nhnacademy.authentication.dev_Member.JwtMemberDto;
 import com.nhnacademy.authentication.dto.*;
 import com.nhnacademy.authentication.utils.JwtUtils;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.Token;
@@ -20,6 +23,7 @@ import java.util.Optional;
 public class LoginController {
 
     private final MemberAdaptor memberAdaptor;
+
     private final JwtUtils jwtUtils;
 
     // 이거 안씀.
