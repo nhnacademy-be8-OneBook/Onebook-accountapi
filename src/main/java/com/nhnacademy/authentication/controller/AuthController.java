@@ -7,7 +7,6 @@ import com.nhnacademy.authentication.utils.JwtUtils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.antlr.v4.runtime.Token;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,30 +16,30 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class LoginController {
+public class AuthController {
 
     private final MemberAdaptor memberAdaptor;
     private final JwtUtils jwtUtils;
 
     // 이거 안씀.
-    @PostMapping("/auth/login")
-    public ResponseEntity<TokenResponse> auth(@RequestBody LoginRequest loginRequest){
-        log.info("Login Request : {}", loginRequest);
-
-        MemberLoginDto memberLoginDto = new MemberLoginDto(loginRequest.getId(), loginRequest.getPassword());
-
-        ResponseEntity<Boolean> isValid = memberAdaptor.login(memberLoginDto);
-
-        log.info(" is valid {}", Objects.requireNonNull(isValid.getBody()).toString());
-
-        if(Boolean.TRUE.equals(isValid.getBody())){
-
-//            return ResponseEntity.of(Optional.of(jwtUtils.makeJwt(memberLoginDto.loginId())));
-            return ResponseEntity.of(Optional.empty());
-        }
-
-        throw new RuntimeException("valid 하지 않음 TODO 바꾸기  ");
-    }
+//    @PostMapping("/auth/login")
+//    public ResponseEntity<TokenResponse> auth(@RequestBody LoginRequest loginRequest){
+//        log.info("Login Request : {}", loginRequest);
+//
+//        MemberLoginDto memberLoginDto = new MemberLoginDto(loginRequest.getId(), loginRequest.getPassword());
+//
+//        ResponseEntity<Boolean> isValid = memberAdaptor.login(memberLoginDto);
+//
+//        log.info(" is valid {}", Objects.requireNonNull(isValid.getBody()).toString());
+//
+//        if(Boolean.TRUE.equals(isValid.getBody())){
+//
+////            return ResponseEntity.of(Optional.of(jwtUtils.makeJwt(memberLoginDto.loginId())));
+//            return ResponseEntity.of(Optional.empty());
+//        }
+//
+//        throw new RuntimeException("valid 하지 않음 TODO 바꾸기  ");
+//    }
 
     // 이게 jwt 생성하는 요청인거 같음.
 
